@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Smart Agriculture Dashboard</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.3/chart.umd.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🌾 Smart Agriculture Dashboard</h1>
+    <p>Real-time soil, weather &amp; crop-health monitoring for low-literacy field use</p>
+  </header>
+
+  <main>
+    <section class="cards" id="sensor-cards">
+      <div class="card"><span class="label">Soil Moisture</span><span class="value" id="v-moisture">--</span></div>
+      <div class="card"><span class="label">Soil pH</span><span class="value" id="v-ph">--</span></div>
+      <div class="card"><span class="label">Temperature</span><span class="value" id="v-temp">--</span></div>
+      <div class="card"><span class="label">Humidity</span><span class="value" id="v-humidity">--</span></div>
+    </section>
+
+    <section class="grid-2">
+      <div class="panel">
+        <h2>7-Day Crop Health Trend</h2>
+        <canvas id="healthChart"></canvas>
+      </div>
+
+      <div class="panel">
+        <h2>Fertilizer Recommendation</h2>
+        <form id="fert-form">
+          <label>Crop
+            <select name="crop">
+              <option value="rice">Rice</option>
+              <option value="wheat">Wheat</option>
+              <option value="maize">Maize</option>
+              <option value="cotton">Cotton</option>
+              <option value="sugarcane">Sugarcane</option>
+            </select>
+          </label>
+          <label>N (kg/ha) <input type="number" name="n" required /></label>
+          <label>P (kg/ha) <input type="number" name="p" required /></label>
+          <label>K (kg/ha) <input type="number" name="k" required /></label>
+          <button type="submit">Get Recommendation</button>
+        </form>
+        <div id="fert-result"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Disease Alert (demo classifier)</h2>
+      <p class="hint">Uses simulated leaf-image features to demo the trained model end-to-end.</p>
+      <button id="simulate-leaf">Simulate Leaf Scan</button>
+      <div id="disease-result"></div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>
